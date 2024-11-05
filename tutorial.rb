@@ -111,3 +111,21 @@
 # puts "#{numbers.min} #{numbers.max} #{numbers.sum}" # 同じメモリ数
 
 #5_A
+# while true
+#   h, w = gets.split.map(&:to_i)
+#   break if h == 0 && w == 0
+#   output = '#'
+#   h.times do
+#     puts output * w
+#   end
+#   puts ''
+# end
+# 繰り返し処理が多いことが気になるが、模範解答（下記）を見ても2重ループしているので許容
+# while true
+#   h, w = gets.split.map(&:to_i)
+#   break if h == 0 && w == 0
+#   h.times do
+#     puts '#' * w
+#   end
+#   puts
+# end
