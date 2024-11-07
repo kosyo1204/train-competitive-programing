@@ -129,3 +129,22 @@
 #   end
 #   puts
 # end
+
+#5_B
+OUT = '#'
+IN = '.'
+while true
+  h, w = gets.split.map(&:to_i)
+  break if h == 0 && w == 0
+  h.times do |i|
+    case i + 1
+    when 1
+      puts OUT * w
+    when h
+      puts OUT * w
+    else
+      puts OUT + IN * (w - 2) + OUT
+    end
+  end
+  puts
+end
