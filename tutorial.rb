@@ -131,20 +131,40 @@
 # end
 
 #5_B
-OUT = '#'
-IN = '.'
+# OUT = '#'
+# IN = '.'
+# while true
+#   h, w = gets.split.map(&:to_i)
+#   break if h == 0 && w == 0
+#   h.times do |i|
+#     case i + 1
+#     when 1
+#       puts OUT * w
+#     when h
+#       puts OUT * w
+#     else
+#       puts OUT + IN * (w - 2) + OUT
+#     end
+#   end
+#   puts
+# end
+
+# 5_C
+# 一つずつ出力するか、まとめて作って出力するか
+# まとめて作っておく場合、固定長となってしまうので出力しきれないパターンがありそう
 while true
-  h, w = gets.split.map(&:to_i)
+  h, w = gets.split(' ').map(&:to_i)
   break if h == 0 && w == 0
   h.times do |i|
-    case i + 1
-    when 1
-      puts OUT * w
-    when h
-      puts OUT * w
-    else
-      puts OUT + IN * (w - 2) + OUT
+    output_line = []
+    i += 1
+    w.times do |j|
+      j += 1
+      # i: 行、j: 列
+      # i+jが偶数なら#を、奇数なら.を出力
+      output_line << ((i + j).even? ? '#' : '.')
     end
+    puts output_line.join
   end
   puts
 end
