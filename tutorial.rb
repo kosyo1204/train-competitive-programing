@@ -150,21 +150,28 @@
 # end
 
 # 5_C
-# 一つずつ出力するか、まとめて作って出力するか
-# まとめて作っておく場合、固定長となってしまうので出力しきれないパターンがありそう
-while true
-  h, w = gets.split(' ').map(&:to_i)
-  break if h == 0 && w == 0
-  h.times do |i|
-    output_line = []
-    i += 1
-    w.times do |j|
-      j += 1
-      # i: 行、j: 列
-      # i+jが偶数なら#を、奇数なら.を出力
-      output_line << ((i + j).even? ? '#' : '.')
-    end
-    puts output_line.join
+# while true
+#   h, w = gets.split(' ').map(&:to_i)
+#   break if h == 0 && w == 0
+#   h.times do |i|
+#     output_line = []
+#     w.times do |j|
+#       # i: 行、j: 列
+#       # i+jが偶数なら#を、奇数なら.を出力
+#       output_line << ((i + j).even? ? '#' : '.')
+#     end
+#     puts output_line.join
+#   end
+#   puts
+# end
+
+#5_D
+n = gets.to_i
+output = []
+n.times do |i|
+  i += 1
+  if i % 3 == 0 || i.to_s.include?('3')
+    output << i
   end
-  puts
 end
+puts " #{output.join(' ')}"
