@@ -166,12 +166,21 @@
 # end
 
 #5_D
+# n = gets.to_i
+# output = []
+# n.times do |i|
+#   i += 1
+#   if i % 3 == 0 || i.to_s.include?('3')
+#     output << i
+#   end
+# end
+# puts " #{output.join(' ')}"
+
+# 6_A
 n = gets.to_i
+numbers = gets.split(' ').map(&:to_i)
 output = []
-n.times do |i|
-  i += 1
-  if i % 3 == 0 || i.to_s.include?('3')
-    output << i
-  end
+numbers.each do |n|
+  output.unshift(n)
 end
-puts " #{output.join(' ')}"
+puts output.join(' ')
