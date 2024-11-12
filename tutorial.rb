@@ -177,10 +177,55 @@
 # puts " #{output.join(' ')}"
 
 # 6_A
+# n = gets.to_i
+# numbers = gets.split(' ').map(&:to_i)
+# output = []
+# numbers.each do |n|
+#   output.unshift(n)
+# end
+# puts output.join(' ')
+
+# 6_B
+# missing_cards = {絵柄1: [numbers], 絵柄1: [numbers], ...}
 n = gets.to_i
-numbers = gets.split(' ').map(&:to_i)
-output = []
-numbers.each do |n|
-  output.unshift(n)
+has_cards = {}
+n.times do
+  suit, rank = gets.chomp.split
+  suit = suit.to_sym
+  has_cards[suit] ||= []
+  has_cards[suit] << rank.to_i
 end
-puts output.join(' ')
+
+ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+all_cards = { 'S': ranks, 'H': ranks, 'C': ranks, 'D': ranks }
+missing_cards = {}
+all_cards.each do |suit, rank|
+  break if n == 52
+  break if all_cards == has_cards
+  missing_cards[suit] = rank unless has_cards[suit] == rank
+end
+
+missing_cards.each do |key, values|
+  values.each do |value|
+    puts "#{key} #{value}"
+  end
+end
+
+# 配列とする場合
+existing_cards = []
+n.times do
+  suit, rank = gets.chomp.split
+  existing_cards << [suit, rank.to_i]
+end
+all_cards = []
+suits = ['S', 'H', 'C', 'D']
+ranks = (1..13).to_a
+suits.each do |suit|
+  ranks.each do |rank|
+    all_cards << [suit, rank]
+  end
+end
+missing_cards = all_cards - existing_cards
+missing_cards.each do |suit, rank|
+  puts "#{suit} #{rank}"
+end
