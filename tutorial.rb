@@ -189,6 +189,8 @@
 # missing_cards = {絵柄1: [numbers], 絵柄1: [numbers], ...}
 n = gets.to_i
 has_cards = {}
+
+# 持っているカードを記録
 n.times do
   suit, rank = gets.chomp.split
   suit = suit.to_sym
@@ -196,22 +198,34 @@ n.times do
   has_cards[suit] << rank.to_i
 end
 
-ranks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-all_cards = { 'S': ranks, 'H': ranks, 'C': ranks, 'D': ranks }
+# 全カードの定義
+ranks = (1..13).to_a
+all_cards = { S: ranks.dup, H: ranks.dup, C: ranks.dup, D: ranks.dup }
+
+# 不足しているカードを見つける
 missing_cards = {}
-all_cards.each do |suit, rank|
-  break if n == 52
-  break if all_cards == has_cards
-  missing_cards[suit] = rank unless has_cards[suit] == rank
+all_cards.each do |suit, ranks|
+  # 持っているカードがない場合は全ての数字が不足
+  if !has_cards[suit]
+    missing_cards[suit] = ranks
+    next
+  end
+  
+  # 持っているカードと比較して不足している数字を見つける
+  missing_cards[suit] = ranks - has_cards[suit]
 end
 
-missing_cards.each do |key, values|
-  values.each do |value|
-    puts "#{key} #{value}"
+# 結果を指定された順序で出力
+[:S, :H, :C, :D].each do |suit|
+  if missing_cards[suit]
+    missing_cards[suit].sort.each do |rank|
+      puts "#{suit} #{rank}"
+    end
   end
 end
 
 # 配列とする場合
+n = gets.to_i
 existing_cards = []
 n.times do
   suit, rank = gets.chomp.split
@@ -229,3 +243,5 @@ missing_cards = all_cards - existing_cards
 missing_cards.each do |suit, rank|
   puts "#{suit} #{rank}"
 end
+
+# 6_D
